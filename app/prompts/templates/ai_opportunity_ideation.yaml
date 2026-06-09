@@ -1,0 +1,154 @@
+id: ai_opportunity_ideation
+version: 4
+description: Science-first catalog-aware article opportunity ideation
+model_task: CLASSIFICATION
+required_variables:
+  - opportunity_ideation_brief_json
+  - min_ideas
+  - max_ideas
+template: |
+  Generate high-quality SEO article opportunities for this website.
+
+  You receive a compact site brief JSON. Use only fields present in the brief.
+
+  ## Volume
+  Generate between {{ min_ideas }} and {{ max_ideas }} opportunities.
+  This count is mandatory. Do not stop early.
+
+  ## Science-first editorial standard
+  Opportunities should read like **scientific explainers, research overviews, and comparison articles** — not supplier documentation or catalog navigation guides.
+
+  Prefer opportunities that:
+  - explain a biological concept
+  - explain a mechanism or receptor pathway
+  - explain a research theme or literature discussion
+  - compare scientific concepts or related products on research merits
+  - teach the reader something substantive about biology, signaling, or preclinical research context
+
+  Avoid opportunities whose **only** value is operational workflow.
+
+  Do **not** generate opportunities whose primary value is:
+  - reading supplier listings
+  - interpreting catalog pages or product page layout
+  - documentation quality checks
+  - shopping guidance or procurement planning
+  - inventory management
+
+  unless the article is explicitly intended as a buyer guide (`content_type: guide` with shopping intent).
+  These topics may appear occasionally but must **not** dominate recommendations.
+
+  ## Category diversity (mandatory quotas)
+  Use `theme_mix_targets` from the brief when present. Otherwise distribute approximately as:
+  - 30–40% product/science research overviews (biology, mechanisms, literature context)
+  - 30–35% comparisons and product-relationship articles (research themes, distinctions, co-discussion)
+  - 15–20% mechanism/background explainers (signaling, pathways, literature themes)
+  - 15–20% practical lab workflow (storage, reconstitution, handling) — **cap: no more than 25% of total**
+  - 5–10% FAQ, calculator, checklist, or resource support content
+
+  Before finalizing, verify:
+  - Science/mechanism/comparison ideas are the majority — not catalog or supplier angles.
+  - Handling/storage/reconstitution topics are **not** the majority.
+  - At least 20% of ideas reference **two or more** products or concepts from the brief.
+  - Each `catalog_products` entry has **at least one science/research overview** (not only handling).
+  - Each `catalog_products` entry has **at least one comparison OR product-relationship** article.
+  - No more than **one** storage-focused and **one** reconstitution/handling-focused idea per catalog product (unless brief says catalog has >75 products).
+  - Do **not** multiply handling/storage/reconstitution variants across every SKU to fill the count.
+
+  ## Catalog coverage (per-product requirements)
+  When `catalog_products` has ≤75 items, every product must appear in at least one opportunity (`headline` or `related_products`).
+  Coverage is a **minimum**, not a license to repeat the same handling angle for every SKU.
+
+  For **each** catalog product, you must include:
+  1. At least **one science/research overview** article (e.g. "What is BPC-157? Research overview and mechanisms discussed in literature").
+  2. At least **one comparison OR product-relationship** article (e.g. "BPC-157 vs TB-500: research themes and distinctions").
+
+  After satisfying per-product science + comparison/relationship coverage, fill remaining ideas from:
+  - niche themes in `suggested_themes`
+  - mechanism/background explainers
+  - site-wide science opportunities
+  - competitor/topic gaps in the brief
+
+  Do **not** fill remaining slots with repeated storage, handling, reconstitution, catalog-selection, or supplier-interpretation variants.
+
+  Use `suggested_themes` and `theme_mix_targets` from the brief for angle ideas, but **do not** treat handling/storage or catalog navigation as the default angle.
+
+  ## Headlines vs RUO framing
+  - Do **not** include "RUO", "(RUO)", or "research-use only" in `headline` unless the topic is specifically about RUO labeling, compliance, documentation, or regulatory terminology.
+  - Put research/laboratory framing in `abstract`, `safety_notes`, and `priority_reason` instead — not in the headline suffix.
+
+  ## Topic examples (steer toward these patterns)
+  Science / overview:
+  - What is BPC-157? Research overview and mechanisms discussed in literature
+  - GHK-CU and copper peptide biology: what researchers study
+  - MOTS-C and mitochondrial signaling: research context and literature themes
+
+  Comparison:
+  - BPC-157 vs TB-500: research themes and distinctions
+  - Retatrutide vs Tirzepatide: receptor biology and category differences
+  - CJC-1295 DAC vs No DAC: how researchers distinguish the two
+
+  Product relationship (not combined-use advice):
+  - Why BPC-157 and TB-500 are often discussed together
+  - Kisspeptin and GnRH signaling: related research themes
+  - MOTS-C and Humanin: mitochondrial peptides in current literature
+
+  Mechanism / background:
+  - AMPK signaling explained
+  - Copper peptides and tissue-signaling research
+  - Growth hormone releasing peptides explained
+
+  Practical lab (limited share):
+  - Lyophilized peptide storage: stability considerations for research materials
+  - Reconstitution workflow basics for laboratory peptide materials
+
+  Compliance / labeling (RUO in headline allowed):
+  - RUO labeling and documentation: what laboratory buyers should verify on peptide COAs
+
+  Avoid:
+  - Headlines centered on catalog language, supplier listings, or product page interpretation
+  - Comparisons framed only around storage, inventory, or documentation quality
+  - Appending "(RUO)" to science, comparison, or mechanism headlines
+  - 30+ near-duplicate storage/reconstitution/handling variants
+  - Generic glossary spam unrelated to catalog products
+  - Topics unrelated to catalog, niche, or competitor gaps in the brief
+  - Duplicating titles in `existing_page_titles`
+  - Relationship articles that imply combined use, protocols, recommendations, or dosing
+
+  Populate `related_topics` with biological concepts, pathways, and research themes — not supplier or inventory topics.
+
+  ## recommendation_type
+  - create (default) | refresh | expand | follow_up
+
+  ## Safety (mandatory)
+  - Research/laboratory framing in abstracts and `safety_notes` when brief indicates peptides or regulated research context
+  - No medical claims, dosing, treatment, clinical outcomes, or human/veterinary use
+  - Relationship articles: discuss co-mention in research discourse only — **do not** imply recommended combined protocols
+  - Headlines: SEO-friendly, not clickbait; no "(RUO)" suffix unless topic is labeling/compliance/documentation/regulatory
+  - Abstracts: 1–2 sentences; include research-use-only framing here when applicable
+  - Include `safety_notes` with RUO/disclaimer language when applicable
+
+  Site brief JSON:
+  {{ opportunity_ideation_brief_json }}
+output_contract: |
+  Return strict JSON only:
+  {
+    "opportunities": [
+      {
+        "headline": "...",
+        "abstract": "...",
+        "search_intent": "informational|comparison|how_to|faq|calculator|research_overview|product_handling|storage|reconstitution|mechanism|product_relationship",
+        "content_type": "guide|comparison|faq|calculator_support|research_overview|how_to|troubleshooting|mechanism_explainer|relationship",
+        "recommendation_type": "create|refresh|expand|follow_up",
+        "related_products": ["..."],
+        "related_topics": ["biological concepts, pathways, research themes — not supplier/inventory topics"],
+        "target_audience": "...",
+        "priority_reason": "...",
+        "safety_notes": ["..."]
+      }
+    ]
+  }
+
+  `priority_reason` is the rationale (why this idea fits the site and search intent).
+safety_rules:
+  - Never generate article body text.
+  - Never include medical or dosing advice in headlines or abstracts.

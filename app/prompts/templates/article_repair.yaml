@@ -1,0 +1,48 @@
+id: article_repair
+version: 1
+description: Repair canonical article JSON against quality issues
+model_task: ARTICLE_REPAIR
+required_variables:
+  - request_data_json
+  - quality_errors_json
+  - quality_warnings_json
+  - target_min_word_count
+  - target_word_count
+  - pass_number
+  - structured_article_json
+  - biomedical_instruction
+  - product_url
+template: |
+  Repair this canonical structured SEO article JSON. Keep the same canonical schema and return strict JSON only.
+
+  Original request:
+  {{ request_data_json }}
+
+  Quality errors:
+  {{ quality_errors_json }}
+
+  Quality warnings:
+  {{ quality_warnings_json }}
+
+  Target minimum word count: {{ target_min_word_count }}
+  Practical repair target: {{ target_word_count }}-2600 words, so the final quality gate has margin.
+  Repair pass: {{ pass_number }}
+
+  Current canonical article JSON:
+  {{ structured_article_json }}
+
+  Targeted repair requirements:
+  - Preserve all existing accurate content and canonical field names.
+  - Expand weak or shallow sections with specific research context, mechanisms under investigation, study design considerations, handling/documentation notes, and limitations.
+  - Include 9-12 sections with most body sections at 160-240 words.
+  - FAQ must contain at least 4 useful, non-promotional answers.
+  - Ensure references_to_verify contains at least 3 search queries or source leads to verify later (editorial-only; do not add a public "References to verify" section in sections).
+  - Ensure internal_links includes the product URL naturally: {{ product_url }}
+  - {{ biomedical_instruction }}
+output_contract: |
+  Return strict JSON with keys "article" and "repair_summary". The article must use the canonical article schema.
+safety_rules:
+  - Do not use HTML in content_markdown.
+  - Do not make treatment recommendations or therapeutic claims.
+  - Avoid forbidden phrases like "treats", "cures", "safe for", "recommended dose", and "patients should".
+  - Do not lower standards or explain that the article cannot be repaired; return repaired JSON.

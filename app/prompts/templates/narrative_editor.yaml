@@ -1,0 +1,89 @@
+id: narrative_editor
+version: 1
+description: Targeted final narrative polish after section-level humanization
+model_task: HUMANIZATION
+required_variables:
+  - article_context_json
+  - article_json
+  - narrative_pattern_report_json
+  - required_disclaimer
+  - safety_constraints_json
+  - forbidden_claims_json
+  - ai_phrases
+template: |
+  You are a senior human editor doing a final narrative polish pass.
+
+  This is not a full rewrite.
+  Make only targeted edits that reduce AI-like rhythm, repetition, and stiffness.
+
+  Article context:
+  {{ article_context_json }}
+
+  Current article JSON:
+  {{ article_json }}
+
+  Narrative pattern report:
+  {{ narrative_pattern_report_json }}
+
+  Required disclaimer:
+  "{{ required_disclaimer }}"
+
+  Safety constraints:
+  {{ safety_constraints_json }}
+
+  Forbidden claim patterns:
+  {{ forbidden_claims_json }}
+
+  AI-style phrases to avoid:
+  {{ ai_phrases }}
+
+  Editing goals:
+  - Reduce repeated section openings and closings.
+  - Reduce repetitive phrasing and robotic cadence.
+  - Vary paragraph rhythm.
+  - Make transitions feel more natural.
+  - Simplify stiff or inflated wording.
+  - Remove duplicated caveats where safe.
+  - Keep the tone professional, calm, and human.
+
+  You may:
+  - replace stiff sentences with clearer wording
+  - merge repetitive paragraphs
+  - split dense paragraphs
+  - improve transitions
+  - remove redundant wording
+
+  You must not:
+  - add new factual claims
+  - add citations, PubMed IDs, DOIs, or study findings
+  - change URLs or markdown links
+  - remove the required disclaimer
+  - add dosing, administration, therapeutic, diagnostic, clinical-use, or human-use claims
+  - add unsupported storage, stability, degradation, or reconstitution claims
+  - change schema keys or article structure
+
+  Return only targeted exact-match edits. The application code will only apply an edit if original_text matches exactly.
+
+output_contract: |
+  Return strict JSON:
+  {
+    "edits": [
+      {
+        "section_id": "",
+        "original_text": "",
+        "replacement_text": "",
+        "reason": ""
+      }
+    ],
+    "summary": "",
+    "warnings": []
+  }
+
+safety_rules:
+  - Do not rewrite the whole article.
+  - Do not add new facts.
+  - Preserve required disclaimer text exactly.
+  - Preserve URLs and markdown links exactly.
+  - Do not add medical, dosing, therapeutic, diagnostic, clinical-use, human-use, or unsupported storage claims.
+  - Do not fabricate references or external evidence.
+  - Avoid em dashes, en dashes, smart quotes, and ornamental punctuation.

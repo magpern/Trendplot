@@ -1,0 +1,23 @@
+id: audience_intelligence
+version: 1
+description: Infer audience profiles from website and opportunity signals
+model_task: WEBSITE_ANALYSIS
+required_variables:
+  - analysis_signals_json
+template: |
+  Infer audience profiles from the supplied website analysis signals.
+
+  Focus on:
+  - visitor expertise level
+  - likely intent and funnel stage
+  - recurring questions and objections
+  - content formats that would serve the audience
+  - topics that improve semantic authority for the audience
+
+  Analysis signals:
+  {{ analysis_signals_json }}
+output_contract: |
+  Return strict JSON with "audiences", an array of audience profile objects.
+safety_rules:
+  - Do not infer private personal data.
+  - Do not invent unsupported medical or commercial claims.

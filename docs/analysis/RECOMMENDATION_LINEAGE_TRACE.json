@@ -1,0 +1,396 @@
+{
+  "workspace_id": "2a71aaf6-cc69-4663-be7f-7b13e50c3722",
+  "website_url": "https://www.example.com/",
+  "analysis_job_id": "98d47dd8-c8e3-4d3e-bbe5-96b2182720ed",
+  "site_strategy_profile_products": [],
+  "traces": {
+    "Bookshelf": {
+      "final_recommendations": [],
+      "analysis_opportunities": [],
+      "strategist_ideas": [],
+      "editorial_concepts": [],
+      "market_candidates": [],
+      "reached_final_queue": false,
+      "likely_source": "not_in_final_queue"
+    },
+    "Adhesives": {
+      "final_recommendations": [],
+      "analysis_opportunities": [],
+      "strategist_ideas": [],
+      "editorial_concepts": [],
+      "market_candidates": [],
+      "reached_final_queue": false,
+      "likely_source": "not_in_final_queue"
+    },
+    "Facebook": {
+      "final_recommendations": [],
+      "analysis_opportunities": [],
+      "strategist_ideas": [],
+      "editorial_concepts": [],
+      "market_candidates": [],
+      "reached_final_queue": false,
+      "likely_source": "not_in_final_queue"
+    },
+    "BPC-157": {
+      "final_recommendations": [
+        {
+          "id": "2a39b1a2-ff3a-4f64-b35b-8b1bc81429a4",
+          "title": "How Researchers Approach BPC-157",
+          "action": "create",
+          "source_type": "editorial_opportunity",
+          "score": 0.677
+        },
+        {
+          "id": "ebdbaf87-a80a-4bc4-b21e-1de06579ef33",
+          "title": "Monitor: BPC-157 comparisons",
+          "action": "monitor",
+          "source_type": "existing_opportunity",
+          "score": 0.281
+        },
+        {
+          "id": "9f1d7037-15fb-4688-a5d5-f853ab60c642",
+          "title": "Ignore for now: BPC-157 research context",
+          "action": "ignore",
+          "source_type": "existing_opportunity",
+          "score": 0.268
+        },
+        {
+          "id": "91f201f2-610f-42a1-99f5-2f96ced2e5e0",
+          "title": "Ignore for now: BPC-157 mechanisms",
+          "action": "ignore",
+          "source_type": "existing_opportunity",
+          "score": 0.248
+        },
+        {
+          "id": "7f261618-4871-4a7c-a2a6-a8dcee14f548",
+          "title": "Ignore for now: BPC-157 myths",
+          "action": "ignore",
+          "source_type": "existing_opportunity",
+          "score": 0.241
+        }
+      ],
+      "analysis_opportunities": [
+        {
+          "id": "95f0bef4-870d-48e7-a913-cc772874843b",
+          "title": "BPC-157 Compared With Adjacent Research Topics"
+        },
+        {
+          "id": "f9382a46-ee0e-4b6b-8584-f78a4866d46c",
+          "title": "The Under-Covered Research Context Around bpc-157"
+        },
+        {
+          "id": "0e28d987-e920-4397-a40e-f03d0dd9fd02",
+          "title": "bpc-157 Compared With Adjacent Research Topics"
+        },
+        {
+          "id": "59c69ae9-515c-4677-9680-da120b423595",
+          "title": "The Mechanisms Behind BPC-157: A Research-Focused Explainer"
+        },
+        {
+          "id": "402fc0b3-0813-4fd9-a5f7-c136cfb2c46c",
+          "title": "What BPC-157 Signals About The Wider Research Category"
+        }
+      ],
+      "strategist_ideas": [],
+      "editorial_concepts": [
+        {
+          "title": "What Is BPC-157? Research Overview"
+        },
+        {
+          "title": "How Researchers Approach BPC-157"
+        },
+        {
+          "title": "Introduction to BPC-157 for New Readers"
+        }
+      ],
+      "market_candidates": [
+        {
+          "topic": "what is BPC-157",
+          "title": "What is what is BPC-157? Definition and context"
+        },
+        {
+          "topic": "BPC-157",
+          "title": "BPC-157: questions answered"
+        },
+        {
+          "topic": "what is BPC-157",
+          "title": "What is what is BPC-157? Definition and context"
+        },
+        {
+          "topic": "BPC-157",
+          "title": "BPC-157: questions answered"
+        },
+        {
+          "topic": "what is BPC-157",
+          "title": "What is what is BPC-157? Definition and context"
+        }
+      ],
+      "reached_final_queue": true,
+      "likely_source": "editorial_opportunity"
+    },
+    "GHK-CU": {
+      "final_recommendations": [
+        {
+          "id": "9f184b34-d99f-4d4d-9c17-52e999a37baf",
+          "title": "Monitor: GHK-CU",
+          "action": "monitor",
+          "source_type": "niche_profile",
+          "score": 0.41
+        },
+        {
+          "id": "7929ca42-d74f-4ea8-9c8d-2297cd14756a",
+          "title": "Monitor: GHK-CU comparisons",
+          "action": "monitor",
+          "source_type": "existing_opportunity",
+          "score": 0.281
+        },
+        {
+          "id": "ace5ae19-bef0-4dbb-b823-947f80d46295",
+          "title": "Ignore for now: GHK-CU research context",
+          "action": "ignore",
+          "source_type": "existing_opportunity",
+          "score": 0.268
+        },
+        {
+          "id": "ee15294b-a564-42e4-a58c-cd2244f9cb4f",
+          "title": "Ignore for now: GHK-CU mechanisms",
+          "action": "ignore",
+          "source_type": "existing_opportunity",
+          "score": 0.248
+        }
+      ],
+      "analysis_opportunities": [
+        {
+          "id": "ef18c616-1457-4eeb-b1fd-7e4c88897b15",
+          "title": "GHK-CU Compared With Adjacent Research Topics"
+        },
+        {
+          "id": "2fe72b09-04df-4bf4-9888-2195e72f4766",
+          "title": "The Mechanisms Behind GHK-CU: A Research-Focused Explainer"
+        },
+        {
+          "id": "436b0e3c-eb5b-4abb-a388-5bcb48c2ba11",
+          "title": "What GHK-CU Signals About The Wider Research Category"
+        },
+        {
+          "id": "12057118-3b4c-4a0c-abd9-16cf3f611100",
+          "title": "How GHK-CU Connects To copper peptides: Research Context And Open Questions"
+        },
+        {
+          "id": "5177f472-3178-4ce0-bed3-acad2753a905",
+          "title": "How GHK-CU Connects To skin research: Research Context And Open Questions"
+        }
+      ],
+      "strategist_ideas": [],
+      "editorial_concepts": [],
+      "market_candidates": [
+        {
+          "topic": "what is GHK-CU",
+          "title": "What is what is GHK-CU? Definition and context"
+        },
+        {
+          "topic": "GHK-CU",
+          "title": "GHK-CU: questions answered"
+        },
+        {
+          "topic": "what is GHK-CU",
+          "title": "What is what is GHK-CU? Definition and context"
+        },
+        {
+          "topic": "GHK-CU",
+          "title": "GHK-CU: questions answered"
+        },
+        {
+          "topic": "what is GHK-CU",
+          "title": "What is what is GHK-CU? Definition and context"
+        }
+      ],
+      "reached_final_queue": true,
+      "likely_source": "niche_profile"
+    },
+    "MOTS-C": {
+      "final_recommendations": [
+        {
+          "id": "e3e2f589-efbc-4e8f-82b9-900241962620",
+          "title": "Monitor: MOTS-C",
+          "action": "monitor",
+          "source_type": "niche_profile",
+          "score": 0.425
+        },
+        {
+          "id": "e38cfd37-71a1-41b7-b390-331b894dba8e",
+          "title": "Monitor: MOTS-C comparisons",
+          "action": "monitor",
+          "source_type": "existing_opportunity",
+          "score": 0.281
+        },
+        {
+          "id": "4eed0042-6b35-497b-93cb-c01bdafdbfdb",
+          "title": "Ignore for now: MOTS-C research context",
+          "action": "ignore",
+          "source_type": "existing_opportunity",
+          "score": 0.268
+        },
+        {
+          "id": "b75bf2b4-03b7-4954-9794-15ee61aeaeb7",
+          "title": "Ignore for now: MOTS-C mechanisms",
+          "action": "ignore",
+          "source_type": "existing_opportunity",
+          "score": 0.248
+        },
+        {
+          "id": "dc32e7bb-923e-400d-9346-d2cf8babc780",
+          "title": "Ignore for now: MOTS-C myths",
+          "action": "ignore",
+          "source_type": "existing_opportunity",
+          "score": 0.241
+        }
+      ],
+      "analysis_opportunities": [
+        {
+          "id": "45d1277a-fadf-4ee4-8fd2-6ac3f625789b",
+          "title": "MOTS-C Compared With Adjacent Research Topics"
+        },
+        {
+          "id": "830ccf0a-6609-41c6-b22a-18f3bc9ca28f",
+          "title": "The Mechanisms Behind MOTS-C: A Research-Focused Explainer"
+        },
+        {
+          "id": "d8289d05-0ee3-4699-bc65-6c1c70364a34",
+          "title": "What MOTS-C Signals About The Wider Research Category"
+        },
+        {
+          "id": "78ca2793-82dd-42e4-9237-7bfbd5ec6eb5",
+          "title": "How MOTS-C Connects To mitochondria: Research Context And Open Questions"
+        },
+        {
+          "id": "ee1a466a-c1fd-4002-b6ab-df1128f684a2",
+          "title": "How MOTS-C Connects To AMPK: Research Context And Open Questions"
+        }
+      ],
+      "strategist_ideas": [],
+      "editorial_concepts": [],
+      "market_candidates": [
+        {
+          "topic": "what is MOTS-C",
+          "title": "What is what is MOTS-C? Definition and context"
+        },
+        {
+          "topic": "MOTS-C",
+          "title": "MOTS-C: questions answered"
+        },
+        {
+          "topic": "what is MOTS-C",
+          "title": "What is what is MOTS-C? Definition and context"
+        },
+        {
+          "topic": "MOTS-C",
+          "title": "MOTS-C: questions answered"
+        },
+        {
+          "topic": "what is MOTS-C",
+          "title": "What is what is MOTS-C? Definition and context"
+        }
+      ],
+      "reached_final_queue": true,
+      "likely_source": "niche_profile"
+    },
+    "Kisspeptin": {
+      "final_recommendations": [
+        {
+          "id": "e7855642-a0ca-4699-afb7-891137388237",
+          "title": "Introduction to Kisspeptin for New Readers",
+          "action": "create",
+          "source_type": "editorial_opportunity",
+          "score": 0.635
+        },
+        {
+          "id": "93893e31-c2de-4397-9652-4cf099ff554a",
+          "title": "Monitor: Kisspeptin comparisons",
+          "action": "monitor",
+          "source_type": "existing_opportunity",
+          "score": 0.281
+        },
+        {
+          "id": "aa554c2a-03fe-4f57-b7ac-faa972b8de89",
+          "title": "Ignore for now: Kisspeptin research context",
+          "action": "ignore",
+          "source_type": "existing_opportunity",
+          "score": 0.268
+        },
+        {
+          "id": "c0c84ee3-bb3a-424c-adf7-efdd55a5ad9d",
+          "title": "Ignore for now: Kisspeptin mechanisms",
+          "action": "ignore",
+          "source_type": "existing_opportunity",
+          "score": 0.248
+        },
+        {
+          "id": "3a64d264-98ad-4d52-a2ff-2d6ddd205c58",
+          "title": "Ignore for now: Kisspeptin myths",
+          "action": "ignore",
+          "source_type": "existing_opportunity",
+          "score": 0.241
+        }
+      ],
+      "analysis_opportunities": [
+        {
+          "id": "7ddb3a8a-9ed6-4dfc-b1cf-b8cadba92405",
+          "title": "Kisspeptin Compared With Adjacent Research Topics"
+        },
+        {
+          "id": "9dfe9545-e18a-4261-838c-e36796baa71c",
+          "title": "The Mechanisms Behind Kisspeptin: A Research-Focused Explainer"
+        },
+        {
+          "id": "cf5a5c1a-17b6-433e-a241-5c5861986dd9",
+          "title": "What Kisspeptin Signals About The Wider Research Category"
+        },
+        {
+          "id": "0bb7ddbf-ac8c-4f7a-a842-76952d2bb512",
+          "title": "How Kisspeptin Connects To research: Research Context And Open Questions"
+        },
+        {
+          "id": "30eebe23-9cbc-44d2-b437-ce630dd86d96",
+          "title": "How Kisspeptin Connects To information: Research Context And Open Questions"
+        }
+      ],
+      "strategist_ideas": [],
+      "editorial_concepts": [
+        {
+          "title": "What Is Kisspeptin? Research Overview"
+        },
+        {
+          "title": "How Researchers Approach Kisspeptin"
+        },
+        {
+          "title": "Introduction to Kisspeptin for New Readers"
+        }
+      ],
+      "market_candidates": [
+        {
+          "topic": "what is Kisspeptin",
+          "title": "What is what is Kisspeptin? Definition and context"
+        },
+        {
+          "topic": "Kisspeptin",
+          "title": "Kisspeptin: questions answered"
+        },
+        {
+          "topic": "what is Kisspeptin",
+          "title": "What is what is Kisspeptin? Definition and context"
+        },
+        {
+          "topic": "Kisspeptin",
+          "title": "Kisspeptin: questions answered"
+        },
+        {
+          "topic": "what is Kisspeptin",
+          "title": "What is what is Kisspeptin? Definition and context"
+        }
+      ],
+      "reached_final_queue": true,
+      "likely_source": "editorial_opportunity"
+    }
+  }
+}

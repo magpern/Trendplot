@@ -1,0 +1,28 @@
+id: research_query_generation
+version: 1
+description: Generate external research queries for opportunity enrichment
+model_task: WEBSITE_ANALYSIS
+required_variables:
+  - research_context_json
+template: |
+  Generate external research/search queries for enriching editorial opportunity discovery.
+
+  Inputs:
+  {{ research_context_json }}
+
+  Rules:
+  - Do not invent facts, citations, search volumes, DOI numbers, PubMed IDs, or claims.
+  - Use the detected vertical and extracted entities as context, but do not overfit if confidence is low.
+  - Create queries that can be sent to approved providers only.
+  - Do not suggest scraping Google directly.
+  - For regulated topics, prefer cautious research, safety, handling, compliance, and verification language.
+
+output_contract: |
+  Return strict JSON only:
+  {
+    "web_search_queries": [],
+    "academic_queries": [],
+    "youtube_queries": [],
+    "reddit_queries": [],
+    "trend_queries": []
+  }

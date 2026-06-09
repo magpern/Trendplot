@@ -1,0 +1,14 @@
+aiosqlite
+alembic
+bleach
+fastapi
+google-auth[requests]
+httpx
+ddgs>=9.0
+markdown
+openai
+psycopg[binary]
+pydantic-settings
+PyYAML
+sqlalchemy
+uvicorn[standard]

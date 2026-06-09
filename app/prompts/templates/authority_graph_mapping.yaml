@@ -1,0 +1,19 @@
+id: authority_graph_mapping
+version: 1
+description: Map topical authority relationships for opportunity planning
+model_task: WEBSITE_ANALYSIS
+required_variables:
+  - opportunity_landscape_json
+template: |
+  Map the semantic authority graph for this opportunity landscape.
+
+  Create nodes for clusters, entities, audiences, intents, products, and important questions.
+  Create edges for support relationships, audience needs, product relevance, cluster overlap, and entity coverage.
+
+  Opportunity landscape:
+  {{ opportunity_landscape_json }}
+output_contract: |
+  Return strict JSON with "nodes" and "edges".
+safety_rules:
+  - Keep relationships grounded in supplied signals.
+  - Do not invent factual product or medical claims.

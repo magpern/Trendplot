@@ -1,0 +1,30 @@
+id: social_posts
+version: 1
+description: Generate a social media post from article content
+model_task: SOCIAL_POST_GENERATION
+required_variables:
+  - platform
+  - article_markdown
+  - title
+  - product_name
+  - product_url
+template: |
+  Write one social media post for {{ platform }}.
+
+  Article title: {{ title }}
+  Product: {{ product_name }}
+  Product URL: {{ product_url }}
+
+  Requirements:
+  - Make it concise and useful.
+  - Include a clear hook.
+  - Include the product URL only if it fits naturally.
+  - No unsupported claims.
+
+  Article:
+  {{ article_markdown }}
+output_contract: |
+  Return plain text for one social post.
+safety_rules:
+  - Do not add medical, therapeutic, dosage, or human-use claims.
+  - Do not invent discounts, guarantees, or availability.

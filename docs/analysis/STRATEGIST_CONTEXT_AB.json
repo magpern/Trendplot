@@ -1,0 +1,156 @@
+{
+  "workspace_id": "2a71aaf6-cc69-4663-be7f-7b13e50c3722",
+  "website_url": "https://www.example.com/",
+  "site_strategy_profile": {
+    "business_type": "ecommerce",
+    "primary_niche": "peptides",
+    "secondary_niches": [
+      "BPC-157",
+      "CJC-1295",
+      "CJC-1295 No DAC + IPA",
+      "GHK-CU",
+      "Kisspeptin",
+      "MOTS-C",
+      "Product Variations & Concentrations",
+      "Research Peptides & Laboratory Compounds Example Lab",
+      "Retatrutide",
+      "aging research"
+    ],
+    "known_products": [
+      "Research Peptides & Laboratory Compounds Example Lab",
+      "Product Variations & Concentrations",
+      "Kisspeptin",
+      "Retatrutide",
+      "MOTS-C",
+      "CJC-1295 No DAC + IPA",
+      "BPC-157",
+      "GHK-CU",
+      "CJC-1295"
+    ],
+    "known_categories": [
+      "aging research",
+      "bpc-157",
+      "mots-c",
+      "peptides",
+      "topical_article",
+      "ampk",
+      "cjc-1295"
+    ],
+    "audiences": [
+      "Research-oriented readers",
+      "Comparison and sourcing visitors"
+    ],
+    "topical_clusters": [
+      "aging research",
+      "bpc-157",
+      "mots-c",
+      "peptides",
+      "topical_article",
+      "ampk",
+      "cjc-1295"
+    ],
+    "existing_articles": [],
+    "content_inventory_summary": "Discovered 215 topical article opportunities for www.example.com."
+  },
+  "context_sizes": {
+    "mode_a_legacy": {
+      "label": "legacy_strategist",
+      "chars": 1492,
+      "estimated_tokens": 373
+    },
+    "mode_b_compact": {
+      "label": "compact_profile",
+      "chars": 820,
+      "estimated_tokens": 205
+    }
+  },
+  "reduction_pct": 45.0,
+  "mode_b_mock_ideas": [
+    {
+      "title": "Research Peptides & Laboratory Compounds Example Lab Research Overview",
+      "topic": "Research Peptides & Laboratory Compounds Example Lab",
+      "entity": "Research Peptides & Laboratory Compounds Example Lab"
+    },
+    {
+      "title": "Product Variations & Concentrations Research Overview",
+      "topic": "Product Variations & Concentrations",
+      "entity": "Product Variations & Concentrations"
+    },
+    {
+      "title": "Kisspeptin Research Overview",
+      "topic": "Kisspeptin",
+      "entity": "Kisspeptin"
+    },
+    {
+      "title": "Retatrutide Research Overview",
+      "topic": "Retatrutide",
+      "entity": "Retatrutide"
+    },
+    {
+      "title": "MOTS-C Research Overview",
+      "topic": "MOTS-C",
+      "entity": "MOTS-C"
+    },
+    {
+      "title": "CJC-1295 No DAC + IPA Research Overview",
+      "topic": "CJC-1295 No DAC + IPA",
+      "entity": "CJC-1295 No DAC + IPA"
+    },
+    {
+      "title": "BPC-157 Research Overview",
+      "topic": "BPC-157",
+      "entity": "BPC-157"
+    },
+    {
+      "title": "GHK-CU Research Overview",
+      "topic": "GHK-CU",
+      "entity": "GHK-CU"
+    },
+    {
+      "title": "CJC-1295 Research Overview",
+      "topic": "CJC-1295",
+      "entity": "CJC-1295"
+    },
+    {
+      "title": "What Is Research Peptides & Laboratory Compounds Example Lab?",
+      "topic": "Research Peptides & Laboratory Compounds Example Lab",
+      "entity": "Research Peptides & Laboratory Compounds Example Lab"
+    },
+    {
+      "title": "What Is Product Variations & Concentrations?",
+      "topic": "Product Variations & Concentrations",
+      "entity": "Product Variations & Concentrations"
+    },
+    {
+      "title": "What Is Kisspeptin?",
+      "topic": "Kisspeptin",
+      "entity": "Kisspeptin"
+    },
+    {
+      "title": "What Is Retatrutide?",
+      "topic": "Retatrutide",
+      "entity": "Retatrutide"
+    },
+    {
+      "title": "What Is MOTS-C?",
+      "topic": "MOTS-C",
+      "entity": "MOTS-C"
+    },
+    {
+      "title": "Research Peptide Storage Guide",
+      "topic": "peptide storage",
+      "entity": "storage"
+    },
+    {
+      "title": "Peptide Reconstitution Guide",
+      "topic": "reconstitution",
+      "entity": "reconstitution"
+    }
+  ],
+  "mode_b_mock_metrics": {
+    "product_alignment_rate": 0.875,
+    "category_alignment_rate": 0.4375,
+    "niche_relevance_rate": 0.125,
+    "off_topic_rate": 0.0
+  }
+}

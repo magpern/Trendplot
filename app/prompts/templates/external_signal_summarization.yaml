@@ -1,0 +1,38 @@
+id: external_signal_summarization
+version: 1
+description: Summarize external research results into evidence-labeled opportunity signals
+model_task: WEBSITE_ANALYSIS
+required_variables:
+  - external_results_json
+template: |
+  Summarize external research/search results for editorial opportunity discovery.
+
+  Inputs:
+  {{ external_results_json }}
+
+  Rules:
+  - Treat external findings as directional signals unless a provider explicitly marks them verified.
+  - Do not create citations, facts, study conclusions, medical claims, treatment claims, legal claims, or guarantees.
+  - Preserve source_type and needs_verification for each summarized theme or opportunity angle.
+  - Highlight caution/compliance notes separately.
+  - Do not use competitor URLs as product URLs.
+
+output_contract: |
+  Return strict JSON only:
+  {
+    "recurring_topics": [],
+    "rising_themes": [],
+    "audience_questions": [],
+    "entity_relationships": [],
+    "competitor_independent_opportunities": [],
+    "caution_compliance_notes": [],
+    "possible_article_angles": [
+      {
+        "title": "",
+        "target_keyword": "",
+        "source_type": "web",
+        "evidence_summary": "",
+        "needs_verification": true
+      }
+    ]
+  }

@@ -1,0 +1,122 @@
+{
+  "database_url": "sqlite:///D:/DeveloperArea/seo-booster/data/seo_content_worker.db",
+  "generated_at": "2026-06-03T21:12:25.060776+00:00",
+  "tables": {
+    "ai_editorial_strategist_ideas": {
+      "count": 20,
+      "exists": true
+    },
+    "ai_editorial_strategist_runs": {
+      "count": 4,
+      "exists": true
+    },
+    "ai_recommendation_review_runs": {
+      "count": 11,
+      "exists": true
+    },
+    "ai_recommendation_reviews": {
+      "count": 0,
+      "exists": true
+    },
+    "audience_profiles": {
+      "count": 151,
+      "exists": true
+    },
+    "authority_graph_edges": {
+      "count": 2983,
+      "exists": true
+    },
+    "authority_graph_nodes": {
+      "count": 2399,
+      "exists": true
+    },
+    "competitor_snapshots": {
+      "count": 215,
+      "exists": true
+    },
+    "content_clusters": {
+      "count": 34,
+      "exists": true
+    },
+    "content_coverage": {
+      "count": 398,
+      "exists": true
+    },
+    "content_entities": {
+      "count": 122,
+      "exists": true
+    },
+    "demand_observation_runs": {
+      "count": 2,
+      "exists": true
+    },
+    "demand_observations": {
+      "count": 0,
+      "exists": true
+    },
+    "editorial_generation_runs": {
+      "count": 81,
+      "exists": true
+    },
+    "editorial_opportunity_concepts": {
+      "count": 6270,
+      "exists": true
+    },
+    "market_intelligence_runs": {
+      "count": 84,
+      "exists": true
+    },
+    "market_opportunity_candidates": {
+      "count": 4536,
+      "exists": true
+    },
+    "market_signal_evidence": {
+      "count": 10386,
+      "exists": true
+    },
+    "market_signals": {
+      "count": 8171,
+      "exists": true
+    },
+    "market_topic_clusters": {
+      "count": 4536,
+      "exists": true
+    },
+    "opportunities": {
+      "count": 17402,
+      "exists": true
+    },
+    "opportunity_audiences": {
+      "count": 17402,
+      "exists": true
+    },
+    "opportunity_campaign_items": {
+      "count": 0,
+      "exists": true
+    },
+    "opportunity_campaigns": {
+      "count": 0,
+      "exists": true
+    },
+    "opportunity_clusters": {
+      "count": 287,
+      "exists": true
+    },
+    "opportunity_relationships": {
+      "count": 2529,
+      "exists": true
+    },
+    "trend_discovery_queries": {
+      "count": 1020,
+      "exists": true
+    },
+    "trend_discovery_runs": {
+      "count": 51,
+      "exists": true
+    },
+    "trend_signals": {
+      "count": 369,
+      "exists": true
+    }
+  }
+}

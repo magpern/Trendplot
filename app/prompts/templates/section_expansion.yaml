@@ -1,0 +1,52 @@
+id: section_expansion
+version: 1
+description: Expand an underdeveloped canonical article section
+model_task: SECTION_EXPANSION
+required_variables:
+  - article_title
+  - target_keyword
+  - product_name
+  - product_url
+  - current_article_word_count
+  - target_article_word_count
+  - pass_number
+  - section_heading
+  - existing_section_content
+  - missing_topics_json
+  - target_section_words
+  - biomedical_rules
+template: |
+  Expand one section of a canonical SEO article. Return strict JSON only.
+
+  Article title: {{ article_title }}
+  Target keyword: {{ target_keyword }}
+  Product name: {{ product_name }}
+  Product URL: {{ product_url }}
+
+  Current article word count: {{ current_article_word_count }}
+  Target article word count: {{ target_article_word_count }}
+  Expansion pass: {{ pass_number }}
+
+  Section heading:
+  {{ section_heading }}
+
+  Existing section content:
+  {{ existing_section_content }}
+
+  Missing or underdeveloped topics to cover:
+  {{ missing_topics_json }}
+
+  Target section word count: {{ target_section_words }}
+
+  Requirements:
+  - Expand only this reader-facing section in sections[*]; do not append verification appendices (references_to_verify, study_cards, or research_metadata_panel).
+  - Expand only this section.
+  - Keep the same heading unless a minor clarity edit is necessary.
+  - Add specific, researcher-oriented details without filler.
+  - Use Markdown only, not HTML.
+  - {{ biomedical_rules }}
+output_contract: |
+  Return strict JSON with "heading", "expanded_content_markdown", and "added_topics".
+safety_rules:
+  - Do not add dosage advice, human-use instructions, treatment claims, or invented citations.
+  - Preserve RUO and compliance language.

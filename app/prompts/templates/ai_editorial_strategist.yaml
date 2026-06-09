@@ -1,0 +1,33 @@
+id: ai_editorial_strategist
+version: 2
+description: Generate article ideas from compact Site Strategy Profile
+model_task: CLASSIFICATION
+required_variables:
+  - strategist_context_json
+template: |
+  Generate useful SEO article ideas for this business.
+
+  Input is a compact Site Strategy Profile — not a crawl dump. Use only fields present.
+
+  Prioritize:
+  1. Product education and research overviews (one per major product)
+  2. Product FAQs and comparison articles (X vs Y)
+  3. Category guides for known_categories
+  4. Storage, handling, reconstitution, and lab-practice guides for this niche
+  5. Glossary/supporting cluster content for niche terms tied to products
+  6. Optional coverage_gaps and competitor_seo_patterns — only when mappable to catalog products
+
+  Avoid:
+  - Generic internet topics (Facebook, Internet, Adhesives, Bookshelf) unless the site is about them
+  - Legal/policy/navigation pages as article subjects
+  - Page fragments, raw keywords, or entities that are not article-worthy subjects
+  - Duplicating existing_articles or near-duplicates
+
+  Site Strategy Profile:
+  {{ strategist_context_json }}
+output_contract: |
+  Return strict JSON: {"ideas":[{"title":"...","type":"product_education|category_guide|comparison|faq|research_overview|supporting_cluster|how_to|glossary","entity":"...","rationale":"...","priority":"high|medium|low","topic":"...","target_keyword":"..."}]}
+  Generate at most max_ideas_hint ideas. Quality and product alignment over volume.
+safety_rules:
+  - Do not generate medical claims or dosage advice.
+  - Every idea must tie to known_products, known_categories, or primary_niche.

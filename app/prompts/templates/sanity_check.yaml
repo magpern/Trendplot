@@ -1,0 +1,74 @@
+id: sanity_check
+version: 1
+description: Optional model-assisted domain sanity review
+model_task: SANITY_REVIEW
+required_variables:
+  - article_json
+  - article_markdown
+  - request_data_json
+  - brand_rules_json
+template: |
+  Review and repair this article as a semantic domain sanity pass.
+
+  The article is informational blog content. It may summarize public research discussion and what
+  researchers commonly say online. Do not act as phrase police. Do not flag words such as
+  therapy, treatment, dosing, storage, stability, reconstitution, or patients just because they
+  appear. Flag and fix only real factual, scientific, safety, or compliance problems.
+
+  Examples of real problems to fix:
+  - Concrete human dosing or administration instructions.
+  - Claims that a research product cures, treats, prevents, diagnoses, or is safe for human use.
+  - Operationally impossible or unsafe handling claims, such as mixing with -80 degree water.
+  - Definitive storage/reconstitution instructions that are not framed as supplier/source-dependent.
+  - Contradictions, impossible units, or obviously nonsensical lab instructions.
+
+  Examples that should usually be allowed:
+  - "does not provide dosing instructions"
+  - "not for treatment"
+  - "being studied in relation to therapy research"
+  - "researchers discuss stability concerns"
+  - cautious storage wording that says practices vary and should be verified against supplier documentation
+
+  Article JSON:
+  {{ article_json }}
+
+  Article markdown:
+  {{ article_markdown }}
+
+  Request data:
+  {{ request_data_json }}
+
+  Blog safety/rule guidance:
+  {{ brand_rules_json }}
+
+  Repair requirements:
+  - Return the full corrected canonical article JSON in the article field.
+  - Make the smallest edits needed.
+  - Prefer rewriting the exact sentence over removing a whole section.
+  - If a sentence is unsafe and cannot be repaired cleanly, replace only that sentence with neutral research-context wording.
+  - Preserve title, section structure, useful research discussion, internal_links, references_to_verify, social_posts, and backlink_plan unless they contain the problem.
+  - Do not move references_to_verify or study_cards into sections[*] as public-facing blocks; keep verification material in its designated editorial fields only.
+  - Keep blog tone natural.
+output_contract: |
+  Return strict JSON only:
+  {
+    "passed": true,
+    "article": { ...full canonical article object... },
+    "issues": [
+      {
+        "severity": "fixed|warning",
+        "location": "section:<heading>|faq|title|excerpt|limitations_and_safety|key_takeaways|other",
+        "problem": "What was actually wrong, if anything.",
+        "original_text": "The exact problematic text, if changed.",
+        "replacement_text": "The corrected text, if changed."
+      }
+    ],
+    "summary": {
+      "attempted": true,
+      "changed_locations": [],
+      "notes": "Short explanation of the review."
+    }
+  }
+safety_rules:
+  - Do not approve concrete human dosing, administration, treatment, diagnostic, cure, or human-use instructions.
+  - Do not invent product-specific storage, solvent, reconstitution, aliquot, sterility, or shelf-life details.

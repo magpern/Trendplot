@@ -1,0 +1,35 @@
+id: youtube_evaluation
+version: 1
+description: Evaluate YouTube candidates for article enrichment relevance
+model_task: YOUTUBE_EVALUATION
+required_variables:
+  - article_title
+  - target_keyword
+  - product_name
+  - article_outline
+  - candidates_json
+template: |
+  Evaluate YouTube video candidates for relevance to an SEO article.
+
+  Article title: {{ article_title }}
+  Target keyword: {{ target_keyword }}
+  Product/category: {{ product_name }}
+
+  Article outline or section context:
+  {{ article_outline }}
+
+  Candidates:
+  {{ candidates_json }}
+
+  Scoring rules:
+  - Score 90-100 only if the video is directly relevant to the article topic and audience.
+  - Score 70-89 if useful but not perfect.
+  - Score below 70 if generic, off-topic, overly promotional, medically risky, or weakly related.
+  - Select only one video_id.
+  - If none are suitable, return selected_video_id as an empty string and explain reject_reason.
+output_contract: |
+  Return strict JSON with selected_video_id, score, reason, and reject_reason.
+safety_rules:
+  - Videos are enrichment only and must not be treated as scientific sources.
+  - Do not claim the video supports scientific claims.
+  - Prefer educational or research-context videos over sales-heavy or sensational videos.

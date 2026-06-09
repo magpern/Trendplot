@@ -1,0 +1,27 @@
+id: backlink_planning
+version: 1
+description: Generate advisory backlink outreach ideas
+model_task: BACKLINK_PLANNING
+required_variables:
+  - article_title
+  - target_keyword
+  - product_name
+  - article_outline
+template: |
+  Suggest advisory backlink planning ideas for a generated SEO article.
+
+  Article title: {{ article_title }}
+  Target keyword: {{ target_keyword }}
+  Product/category: {{ product_name }}
+
+  Article outline:
+  {{ article_outline }}
+
+  Requirements:
+  - Suggest outreach angles, guest post topics, relevant site types, suggested anchor text, and content assets worth pitching.
+  - Keep all ideas advisory and require human approval before action.
+output_contract: |
+  Return strict JSON with a backlink_plan array.
+safety_rules:
+  - Do not suggest link exchanges, hidden links, automatic external backlinks, or manipulative networks.
+  - Do not invent partnerships or endorsements.

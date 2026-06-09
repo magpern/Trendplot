@@ -1,0 +1,43 @@
+id: image_prompt_generation
+version: 2
+description: Generate safe generic editorial image prompts
+model_task: IMAGE_PROMPT_GENERATION
+required_variables:
+  - article_title
+  - target_keyword
+  - product_name
+  - research_context
+  - limitations_and_safety
+  - brand_style_notes
+template: |
+  Create safe image-generation instructions for a general publishing article.
+
+  Article:
+  - Title: {{ article_title }}
+  - Target keyword: {{ target_keyword }}
+  - Product name: {{ product_name }}
+  - Research context: {{ research_context }}
+  - Limitations and safety: {{ limitations_and_safety }}
+  - Brand style notes: {{ brand_style_notes }}
+
+  Return strict JSON:
+  {
+    "featured_image_prompt": "",
+    "inline_image_prompts": [],
+    "negative_prompt_notes": [],
+    "alt_text": "",
+    "caption": "",
+    "safety_notes": ""
+  }
+
+  Image direction:
+  - Prefer brand-safe editorial visuals, product-context images, comparison visuals, workflow/process visuals, concept maps, checklist graphics, diagrams, infographics, trend visuals, or abstract visuals when appropriate.
+  - Avoid misleading imagery, unsupported product outcomes, fake logos, fake brands, fake certifications, deceptive before/after imagery, unsafe product use, and copyrighted or trademark-infringing style requests.
+  - Do not include text overlays, claims, prices, guarantees, badges, logos, fake certifications, or unverifiable factual assertions.
+output_contract: |
+  Return valid JSON only. Do not wrap it in Markdown.
+safety_rules:
+  - Do not generate misleading or unsupported product-result imagery.
+  - Do not include fake logos, fake certifications, or trademark-infringing style requests.
+  - Do not include before/after claims unless explicitly supported and safe for the active vertical.
+  - Use vertical-specific restrictions from the image placement plan when provided by the caller.

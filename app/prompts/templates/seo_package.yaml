@@ -1,0 +1,57 @@
+id: seo_package
+version: 2
+description: Generate Rank Math SEO package for a Trendplot article
+model_task: SEO_METADATA
+required_variables:
+  - article_title
+  - article_content
+  - target_keyword
+  - product_name
+  - meta_description
+  - related_products_json
+  - article_type
+template: |
+  Create a Rank Math SEO package for this Trendplot article.
+
+  Article title: {{ article_title }}
+  Article type: {{ article_type }}
+  Target keyword: {{ target_keyword }}
+  Product name: {{ product_name }}
+  Existing meta description (if any): {{ meta_description }}
+  Related products: {{ related_products_json }}
+
+  Article content (publishable HTML or markdown):
+  {{ article_content }}
+
+  Focus keyword strategy (Rank Math supports up to two comma-separated focus keywords):
+  1. Primary focus keyword — the article's main search phrase (comparison, relationship, or overview phrase).
+     Examples: TB-500 vs BPC-157, BPC-157 research overview, CJC-1295 No DAC + IPA
+  2. Secondary focus keyword — one concrete product or entity name when product_name or related_products are available.
+     Examples: BPC-157, TB-500, CJC-1295
+
+  Return focus_keyword as a single comma-separated string, e.g. "TB-500 vs BPC-157, BPC-157".
+  Maximum two focus keywords. Do not add generic filler keywords.
+
+  Requirements:
+  - focus_keyword must contain at most two comma-separated phrases.
+  - When product_name or related_products are available, at least one phrase must include a concrete product/entity name.
+  - SEO title should include the primary focus keyword where natural (under 60 characters when practical).
+  - Meta description should include the primary focus keyword where natural (under 160 characters when practical).
+  - Avoid keyword stuffing.
+  - Prefer schema_type "Article" unless article type clearly indicates otherwise.
+  - robots should default to an empty array [] (index/follow). Only include Rank Math negative directives when truly needed: noindex, nofollow, noarchive, nosnippet, noimageindex, noodp.
+  - canonical_url must be blank unless you are confident about the final public URL; do not guess staging URLs.
+output_contract: |
+  Return strict JSON only with exactly these keys:
+  {
+    "title": "...",
+    "description": "...",
+    "focus_keyword": "Primary phrase, Secondary product",
+    "canonical_url": "",
+    "robots": [],
+    "schema_type": "Article"
+  }
+safety_rules:
+  - Do not invent factual claims, prices, or guarantees.
+  - Do not add therapeutic or human-use claims.
+  - Use at most two focused keyword phrases; avoid keyword stuffing.

@@ -1,0 +1,90 @@
+id: humanization
+version: 2
+description: Deep editorial rewrite of canonical article while preserving schema, safety, and factual boundaries
+model_task: HUMANIZATION
+required_variables:
+  - request_data_json
+  - article_json
+  - required_disclaimer
+  - target_min_word_count
+  - ai_phrases
+template: |
+  You are an experienced human editor rewriting an AI-generated article.
+
+  Your job is not light polishing.
+  Your job is to make the article read like it was written and edited by a competent human specialist.
+
+  Preserve the canonical JSON schema exactly, but substantially improve the prose inside text fields.
+
+  Request:
+  {{ request_data_json }}
+
+  Current article JSON:
+  {{ article_json }}
+
+  Required disclaimer:
+  "{{ required_disclaimer }}"
+
+  Editorial goals:
+  - Rewrite stiff AI-generated prose into natural professional editorial writing.
+  - Vary sentence length and paragraph rhythm.
+  - Remove formulaic transitions.
+  - Remove repeated phrasing and repeated sentence openings.
+  - Reduce robotic section cadence.
+  - Merge or simplify redundant ideas where possible.
+  - Prefer clear, direct wording over inflated authority language.
+  - Keep the tone modern, calm, precise, and professional.
+  - Avoid slang, hype, sales language, and exaggerated certainty.
+
+  Anti-AI style rules:
+  - Avoid these phrases and close variants: {{ ai_phrases }}
+  - Avoid repeated openings such as "Researchers should", "It is important", "This article", "In research settings", and "Reliable experiments".
+  - Avoid excessive use of "context", "robust", "meticulous", "central", "critical", "supports", "underscores", "highlights", "leverages", "plays a role", and "provides insights".
+  - Avoid paragraph patterns where every section starts with a definition and ends with a safety caveat.
+  - Avoid stacking many short explanatory sections with the same rhythm.
+  - Avoid repeating RUO language in multiple places. Keep the required disclaimer exactly where needed, but remove redundant duplicates.
+
+  Content preservation rules:
+  - Keep the same top-level JSON fields.
+  - Keep all field names unchanged.
+  - Preserve product URLs, internal links, FAQ, references_to_verify, backlink_plan, and social post fields.
+  - Humanize sections[*].content_markdown and other reader-facing prose by default; preserve study_cards, research_insights, and research_metadata_panel as editorial-only fields without expanding them into public sections.
+  - Preserve optional rich components unless clearly duplicated.
+  - Preserve the required disclaimer exactly wherever it appears.
+  - Keep word count at or above {{ target_min_word_count }}.
+  - Do not add new scientific claims.
+  - Do not add new storage, reconstitution, dosing, treatment, clinical, or human-use claims.
+  - If a storage/handling claim is precise but not explicitly source-grounded, rewrite it cautiously:
+    "Storage and handling requirements can vary by formulation, batch, and supplier documentation. Researchers should refer to the product label, Certificate of Analysis, and supplied handling instructions."
+
+  Rewrite behavior:
+  - Rewrite each section as if editing for a professional publication.
+  - Prefer fewer, stronger paragraphs over many formulaic paragraphs.
+  - Make the article feel less templated.
+  - Do not simply swap synonyms.
+  - Keep technical meaning but make the prose more human.
+  - Where content is repetitive, consolidate.
+  - Where wording is vague, make it clearer without adding new facts.
+  - Where claims sound too certain, soften them.
+  - Where text sounds like marketing, make it educational.
+
+output_contract: |
+  Return strict JSON:
+  {
+    "article": { ...same canonical schema... },
+    "humanization_summary": {
+      "mode": "deep_editorial_rewrite",
+      "major_changes": [],
+      "repeated_phrases_removed": [],
+      "safety_preserved": true,
+      "word_count_estimate": 0,
+      "warnings": []
+    }
+  }
+
+safety_rules:
+  - Do not fabricate citations, PubMed IDs, DOIs, study results, or product documentation.
+  - Do not add dosage advice, human-use instructions, treatment recommendations, or therapeutic claims.
+  - Do not add unsupported storage, reconstitution, degradation, or stability claims.
+  - Preserve the required RUO disclaimer exactly.
+  - Avoid em dashes, en dashes, smart quotes, and ornamental punctuation.

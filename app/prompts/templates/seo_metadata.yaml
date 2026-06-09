@@ -1,0 +1,26 @@
+id: seo_metadata
+version: 1
+description: Generate SEO metadata for an article
+model_task: SEO_METADATA
+required_variables:
+  - article_markdown
+  - target_keyword
+template: |
+  Create SEO metadata for the following Markdown article.
+
+  Target keyword: {{ target_keyword }}
+
+  Article:
+  {{ article_markdown }}
+output_contract: |
+  Return strict JSON with:
+  - seo_title (under 60 characters when practical)
+  - seo_description (under 160 characters when practical)
+  - seo_focus_keyword (one focused keyword phrase, no stuffing)
+  - seo_canonical_url (absolute URL suggestion when appropriate)
+  - seo_robots (e.g. "index, follow"; Rank Math stores only negative directives such as "noindex, nofollow")
+  - seo_schema_type (e.g. "Article", "BlogPosting", or "WebPage")
+safety_rules:
+  - Do not invent factual claims, prices, or guarantees.
+  - Do not add therapeutic or human-use claims.
+  - Use one focused keyword only; avoid keyword stuffing.

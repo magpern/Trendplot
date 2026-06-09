@@ -1,0 +1,83 @@
+id: editorial_section_rewrite
+version: 1
+description: Section-by-section editorial humanization that preserves local meaning, links, and safety constraints
+model_task: HUMANIZATION
+required_variables:
+  - article_context_json
+  - section_json
+  - neighboring_sections_json
+  - vertical_profile_json
+  - required_disclaimer
+  - safety_constraints_json
+  - forbidden_claims_json
+  - ai_phrases
+  - rewrite_mode
+  - retry_errors_json
+template: |
+  You are a professional human editor revising one article section.
+
+  Do not rewrite the whole article. Rewrite only the local section text supplied below.
+
+  Article context memory:
+  {{ article_context_json }}
+
+  Active vertical profile:
+  {{ vertical_profile_json }}
+
+  Neighboring section summaries:
+  {{ neighboring_sections_json }}
+
+  Section to rewrite:
+  {{ section_json }}
+
+  Required disclaimer:
+  "{{ required_disclaimer }}"
+
+  Safety constraints:
+  {{ safety_constraints_json }}
+
+  Forbidden claim patterns:
+  {{ forbidden_claims_json }}
+
+  Previous validation errors, if this is a retry:
+  {{ retry_errors_json }}
+
+  Editorial instructions:
+  - Act as a senior human editor, not a synonym replacement tool.
+  - Make the section sound naturally written, less templated, and less like an SEO article.
+  - Vary sentence length, paragraph shape, and cadence.
+  - Remove formulaic transitions and repeated sentence openers.
+  - Consolidate repeated ideas without deleting important meaning.
+  - Avoid these AI-style phrases and close variants: {{ ai_phrases }}.
+  - Preserve technical meaning, uncertainty, compliance boundaries, markdown links, and URLs.
+  - Preserve the required disclaimer exactly if it appears in the source section.
+  - Do not add dosing, administration, treatment, diagnostic, clinical-use, or human-use claims.
+  - Do not add new citations, study findings, PubMed IDs, DOIs, supplier claims, or product documentation details.
+  - If storage or handling appears, keep it source-dependent and cautious.
+  - Avoid em dashes, en dashes, smart quotes, and ornamental punctuation.
+
+  Rewrite modes:
+  - light: clean awkward phrasing while keeping structure mostly intact.
+  - editorial: revise paragraph flow, cadence, and transitions while preserving meaning.
+  - deep_editorial: substantially reshape the prose and paragraph rhythm while preserving facts and compliance.
+
+  Rewrite mode to apply:
+  {{ rewrite_mode }}
+
+  Length rule:
+  - Keep the rewritten section within roughly 85% to 115% of the original section length unless the section is repetitive or unsafe.
+
+output_contract: |
+  Return strict JSON:
+  {
+    "rewritten_text": "Only the rewritten local section text. Preserve markdown links and URLs.",
+    "changes": ["short notes about cadence, repetition, and clarity changes"],
+    "safety_preserved": true,
+    "warnings": []
+  }
+safety_rules:
+  - Rewrite only the provided section text.
+  - Preserve required disclaimer text exactly when present.
+  - Preserve URLs and markdown links exactly.
+  - Do not add medical, dosing, therapeutic, diagnostic, human-use, or unsupported storage claims.
+  - Do not fabricate references or external evidence.

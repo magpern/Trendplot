@@ -1,0 +1,49 @@
+id: manual_recommendation_enrichment
+version: 1
+description: Enrich operator-entered manual article ideas into structured recommendations
+model_task: CLASSIFICATION
+required_variables:
+  - workspace_brief_json
+  - raw_headline
+  - raw_notes
+  - selected_products_json
+  - content_type_hint
+  - target_audience_hint
+template: |
+  Convert the operator's manual article idea into a structured SEO article recommendation.
+
+  ## Workspace brief
+  {{ workspace_brief_json }}
+
+  ## Operator input
+  - Headline or idea: {{ raw_headline }}
+  - Notes: {{ raw_notes }}
+  - Selected products (optional): {{ selected_products_json }}
+  - Content type hint (optional): {{ content_type_hint }}
+  - Target audience hint (optional): {{ target_audience_hint }}
+
+  ## Rules
+  - Improve the headline for clarity and research/editorial fit.
+  - Infer the best `search_intent` and `content_type` when not provided.
+  - Prefer catalog product names from the workspace brief when inferring `related_products`.
+  - Produce a short abstract (1-2 sentences).
+  - Maintain research-use-only / compliance framing where relevant for biomedical catalogs.
+  - Do NOT create medical claims, treatment advice, dosing, protocols, or human-use guidance.
+  - Do NOT recommend combined use, stacking, or purchasing decisions.
+  - Relationship articles may explain that products are often discussed or compared together in literature, but must not recommend combined use.
+  - `recommendation_type` should usually be `create`.
+
+  ## Output
+  Respond with strict JSON only:
+  {
+    "headline": "...",
+    "abstract": "...",
+    "search_intent": "...",
+    "content_type": "...",
+    "recommendation_type": "create",
+    "related_products": [],
+    "related_topics": [],
+    "target_audience": "...",
+    "priority_reason": "...",
+    "safety_notes": []
+  }

@@ -1,0 +1,97 @@
+id: article_generation
+version: 2
+description: Canonical structured article generation prompt
+model_task: ARTICLE_GENERATION
+required_variables:
+  - title
+  - target_keyword
+  - product_name
+  - product_url
+  - min_word_count
+  - max_word_count
+  - target_word_count_mid
+  - opportunity_context_json
+template: |
+  Create a high-quality SEO article as strict JSON.
+
+  Input:
+  - Title: {{ title }}
+  - Target keyword: {{ target_keyword }}
+  - Product name: {{ product_name }}
+  - Product URL: {{ product_url }}
+  - Body length target: {{ min_word_count }}–{{ max_word_count }} words (aim ~{{ target_word_count_mid }} words across body sections).
+  - Editorial opportunity brief (when provided, use as planning context — do not copy verbatim): {{ opportunity_context_json }}
+  - When the opportunity brief includes science_focus: true, prioritize mechanism, receptor biology, signaling pathways, and literature discussion. Use science_depth_targets when present (major_pathways, recurring_literature_themes, experimental_models, controversies, evidence_strengths, evidence_limitations) to teach substantive biology — not catalog navigation, supplier listings, documentation quality checks, or shopping guidance unless the brief explicitly requests a buyer guide.
+  - State evidence limitations once in limitations_and_safety; do not repeat the same uncertainty caveat across multiple sections.
+
+  Return strict JSON with exactly the canonical article schema.
+
+  Reader-facing content (published to the site):
+  title, slug, excerpt, meta_title, meta_description, primary_keyword, secondary_keywords,
+  key_takeaways, table_of_contents, sections, faq, research_context, limitations_and_safety,
+  internal_links, related_video, callout_boxes, definition_boxes, caution_boxes, comparison_tables,
+  related_topics.
+
+  Editorial verification (internal QA only — not shown to readers):
+  references_to_verify, study_cards, research_insights, research_metadata_panel,
+  inline_citation_markers, backlink_plan, social_posts.
+  Keep all editorial verification fields concise; together they must not exceed 10–15% of the total JSON size.
+
+  This is the final publishable draft. No later humanization, narrative polish, or section-expansion pass will run.
+  Write in a direct, expert, human editorial voice from the first sentence.
+
+  Length (count words in sections[*].content_markdown only — not FAQ, metadata, or QA fields):
+  - Target range: {{ min_word_count }} to {{ max_word_count }} words.
+  - Aim for approximately {{ target_word_count_mid }} words on first generation.
+  - Do not use broken range phrasing in the article (for example, never write "at least {{ min_word_count }}–{{ max_word_count }} words").
+
+  Search intent:
+  - Answer the main search intent for "{{ target_keyword }}" directly in the first two body sections (sections[0] and sections[1]).
+  - The opening sections should satisfy the reader's primary question before background or secondary topics.
+
+  Tone and style:
+  - Use concrete, specific sentences with practical detail.
+  - Avoid academic filler, vague meta-commentary, and stock phrases such as "it is important to note" unless genuinely necessary.
+  - Avoid generic AI-style phrases, formulaic transitions, em dashes, en dashes, smart quotes, and emoji.
+
+  Context overview (JSON field: research_context):
+  - For biomedical, laboratory, peptide, or research-use-only topics: write research-oriented background (evidence limits, methods, open questions).
+  - For ecommerce, SaaS, services, or general buyer topics: write a practical user or buyer context overview (needs, use cases, decision factors) — not academic "research context" prose.
+  - Match the tone to the niche; do not force the heading phrase "Research Context" into section titles unless the topic is biomedical.
+
+  Repetition:
+  - Do not repeat the same safety warning, uncertainty caveat, supplier-documentation note, or disclaimer across multiple sections.
+  - State each major safety or compliance point once clearly (typically in limitations_and_safety), then avoid restating it unless a brief cross-reference is truly necessary.
+
+  Article structure requirements:
+  - The article body must live in sections[*].content_markdown, not final HTML.
+  - Use 10–14 meaningful sections with 150–300 words in most body sections.
+  - Use hierarchy: H1 is title, sections are H2-level, and sections may include subsections as H3-level subtopics.
+  - Avoid flat section dumps. Use subsections when a major topic contains distinct methods, models, mechanisms, limitations, or interpretation notes.
+  - callout_boxes are reader-facing practical tips (checklists, handling notes), not verification logs.
+  - Populate references_to_verify and study_cards as brief internal verification leads only; do not duplicate them in sections or present as confirmed citations.
+  - study_cards titles should use neutral internal labels (e.g. "Gap: …") when used.
+  - Include key_takeaways, the context overview field, practical body sections, limitations_and_safety, and FAQ in reader-facing fields.
+  - FAQ must contain at least 4 substantive Q&A pairs aligned to search intent.
+  - limitations_and_safety must include the exact configured RUO disclaimer when the topic is biomedical or research-use-only.
+  - internal_links must include at least one natural product link using {{ product_name }} and {{ product_url }} (anchor text should read naturally, not like a banner CTA). Trendplot also adds a small number of editorial product links automatically; do not force-link every mention.
+  - Mention the product or category naturally in the body where relevant.
+  - Include a concise closing section before FAQ that summarizes the reader takeaway (research summary or buyer summary, matching the niche).
+  - meta_title and meta_description must be publication-ready SEO fields.
+  - Rank Math / on-page SEO alignment (apply naturally — no keyword stuffing):
+    - Include the target keyword in the article title when natural.
+    - Include the target keyword in the first body paragraph (sections[0]) when natural.
+    - Include the target keyword in at least one H2/H3 subsection heading when natural.
+    - Include at least one internal product or article link where inventory links are available.
+    - Keep keyword density natural; do not repeat the exact keyword awkwardly.
+  - Do not include "RUO", "(RUO)", or "research-use only" in title, meta_title, or section headings unless the article topic is RUO labeling, compliance, documentation, or regulatory terminology. Keep research-use-only framing in excerpt, limitations_and_safety, and body content.
+  - Backlink planning is advisory only and requires human approval before action.
+
+output_contract: |
+  Return valid JSON matching the canonical article schema. Do not wrap it in Markdown.
+safety_rules:
+  - Do not invent citations, PubMed IDs, DOIs, prices, guarantees, awards, reviews, or unverifiable claims.
+  - Do not provide dosage instructions, human-use instructions, treatment recommendations, or therapeutic claims.
+  - Preserve research-use-only framing and include the configured RUO disclaimer when relevant.
+  - Do not output HTML in section content.
+  - Do not use emoji, em dashes, en dashes, or smart quotes.
